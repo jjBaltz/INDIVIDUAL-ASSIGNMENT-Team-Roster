@@ -1,25 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
+import { getSpiritBottles } from '../api/bottlesData';
 import { useAuth } from '../utils/context/authContext';
+import BottleCard from '../components/BottleCard';
 
 function Home() {
+  const [bottles, setBottles] = useState([]);
   const { user } = useAuth();
 
+  const getAllBottles = () => {
+    getSpiritBottles(user.uid).then(setBottles);
+  };
+
+  useEffect(() => {
+    getAllBottles();
+  }, []);
+
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
+    <div className="text-center my-4">
+      <Link href="/bottle/newBottle" passHref>
+        <Button>Add A Bottle</Button>
+      </Link>
+      <div className="d-flex flex-wrap">
+        {bottles.map((bottle) => (
+          <BottleCard key={bottle.firebaseKey} bottleObj={bottle} onUpdate={getAllBottles} />
+        ))}
+      </div>
+
     </div>
   );
 }
