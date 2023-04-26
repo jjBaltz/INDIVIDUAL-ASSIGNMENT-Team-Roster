@@ -1,44 +1,81 @@
-import axios from 'axios';
 import { clientCredentials } from '../utils/client';
 // API CALLS FOR BOOKS
 
-const dbUrl = clientCredentials.databaseURL;
+const endpoint = clientCredentials.databaseURL;
 
 const getSpiritBottles = (uid) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/bottles.json?orderBy="uid"&equalTo="${uid}"`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
+  fetch(`${endpoint}/bottles.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
       } else {
         resolve([]);
       }
     })
-    .catch((error) => reject(error));
+    .catch(reject);
 });
 
 const deleteBottle = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.delete(`${dbUrl}/bottles/${firebaseKey}.json`)
-    .then(() => resolve('deleted'))
-    .catch((error) => reject(error));
+  fetch(`${endpoint}/bottles/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
 });
 
 const getSingleBottle = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/bottles/${firebaseKey}.json`)
-    .then((response) => resolve(response.data))
-    .catch((error) => reject(error));
+  fetch(`${endpoint}/bottles/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
 });
 
-const createBottle = (bottleObj) => new Promise((resolve, reject) => {
-  axios.post(`${dbUrl}/bottles.json`, bottleObj)
-    .then((response) => {
-      const payload = { firebaseKey: response.data.name };
-      axios.patch(`${dbUrl}/bottles/${response.data.name}.json`, payload)
-        .then(resolve);
-    }).catch(reject);
+const createBottle = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/bottles.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const setcode = { firebaseKey: data.name };
+      fetch(`${endpoint}/bottles/${setcode.firebaseKey}.json`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(setcode),
+      }).then(resolve);
+    })
+    .catch(reject);
 });
 
-const updateBottle = (bottleObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/bottles/${bottleObj.firebaseKey}.json`, bottleObj)
+const updateBottle = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/bottles/${payload.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
     .then(resolve)
     .catch(reject);
 });
