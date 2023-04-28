@@ -18,5 +18,46 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #dadada;
+}
+
+.btn-add-btl {
+  background: #25636C;
+  border-color: #25636C;
+  color: white;
+}
+.btn-add-btl:hover {
+  background: white;
+  border-color: #25636C;
+  color: #25636C;
+}
+
+.btn-success {
+  background: #7294A2;
+  border-color: #7294A2;
+}
+.btn-success:hover {
+  background: #347FE5;
+}
+
+.btn-primary {
+  background: #7294A2;
+  border-color: #7294A2;
+}
+
+.btn-info {
+  background: #AAD4D6;
+  border-color: #AAD4D6;
+  color: white;
+}
+.btn-info:hover {
+  color: white;
+}
+
+.btn-danger {
+  background: #B26666;
+  border-color: #B26666;
+}
+.btn-danger:hover {
+  background: #990000; 
 }

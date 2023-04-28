@@ -24,15 +24,15 @@ export default function ViewSpirit() {
     <>
       <div className="d-flex">
         <div className="mt-5" />
-        <div className="d-flex flex-column text-white mt-5 details">
+        <div className="d-flex flex-column text-black mt-5 details">
           <h2>
             {spiritDetails.type_name}
-            {spiritDetails.favorite ? ' 🤍' : ''}
+            {spiritDetails.favorite ? ' ♡' : ''}
           </h2>
         </div>
       </div>
       <br />
-      <h3 className="text-white details text-left">Spirit&apos;s Bottle Collection</h3>
+      <h3 className="text-black details text-left">Spirit&apos;s Bottle Collection</h3>
       <div className="d-flex flex-wrap">
         {bottles.map((bottle) => (
           <BottleCard key={bottle.firebaseKey} bottleObj={bottle} onUpdate={getSpiritBottles} />
