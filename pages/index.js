@@ -21,7 +21,7 @@ function Home() {
   return (
     <div className="text-center my-4">
       <Link href="/bottle/newBottle" passHref>
-        <Button>Add A Bottle</Button>
+        <Button variant="add-btl">Add A Bottle</Button>
       </Link>
       <div className="d-flex flex-wrap">
         {bottles.map((bottle) => (
