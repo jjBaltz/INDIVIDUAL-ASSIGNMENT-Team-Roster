@@ -12,7 +12,7 @@ const initialState = {
   description: '',
   image: '',
   price: '',
-  sale: false,
+  favorite: false,
   title: '',
 };
 
@@ -54,7 +54,7 @@ function BottleForm({ obj }) {
       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Bottle</h2>
 
       {/* TITLE INPUT  */}
-      <FloatingLabel controlId="floatingInput1" label="Bottle Type" className="mb-3">
+      <FloatingLabel controlId="floatingInput1" label="Bottle Name" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Enter A Type"
@@ -66,7 +66,7 @@ function BottleForm({ obj }) {
       </FloatingLabel>
 
       {/* IMAGE INPUT  */}
-      <FloatingLabel controlId="floatingInput2" label="Bottle Image" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Image URL" className="mb-3">
         <Form.Control
           type="url"
           placeholder="Image of Bottle"
@@ -78,7 +78,7 @@ function BottleForm({ obj }) {
       </FloatingLabel>
 
       {/* PRICE INPUT  */}
-      <FloatingLabel controlId="floatingInput3" label="Bottle Price" className="mb-3">
+      <FloatingLabel controlId="floatingInput3" label="Price" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Enter Price"
@@ -90,7 +90,7 @@ function BottleForm({ obj }) {
       </FloatingLabel>
 
       {/* AUTHOR SELECT  */}
-      <FloatingLabel controlId="floatingSelect" label="Spirit">
+      <FloatingLabel controlId="floatingSelect" label="Spirit Type">
         <Form.Select
           aria-label="Spirit"
           name="spirit_id"
@@ -99,7 +99,7 @@ function BottleForm({ obj }) {
           value={obj.spirit_id}
           required
         >
-          <option value="">Select A Spirit</option>
+          <option value="">Select</option>
           {
             spirits.map((spirit) => (
               <option
@@ -114,7 +114,7 @@ function BottleForm({ obj }) {
       </FloatingLabel>
 
       {/* DESCRIPTION TEXTAREA  */}
-      <FloatingLabel controlId="floatingTextarea" label="Description" className="mb-3">
+      <FloatingLabel controlId="floatingTextarea" label="Bottle Description" className="mb-3">
         <Form.Control
           as="textarea"
           placeholder="Description"
@@ -130,14 +130,14 @@ function BottleForm({ obj }) {
       <Form.Check
         className="text-white mb-3"
         type="switch"
-        id="sale"
-        name="sale"
-        label="On Sale?"
-        checked={formInput.sale}
+        id="favorite"
+        name="favorite"
+        label="Favorite?"
+        checked={formInput.favorite}
         onChange={(e) => {
           setFormInput((prevState) => ({
             ...prevState,
-            sale: e.target.checked,
+            favorite: e.target.checked,
           }));
         }}
       />
@@ -153,7 +153,7 @@ BottleForm.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
     price: PropTypes.string,
-    sale: PropTypes.bool,
+    favorite: PropTypes.bool,
     title: PropTypes.string,
     spirit_id: PropTypes.string,
     firebaseKey: PropTypes.string,
