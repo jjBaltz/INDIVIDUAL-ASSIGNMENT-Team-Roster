@@ -8,6 +8,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { createSpirit, updateSpirit } from '../../api/spiritsData';
 
 const initialState = {
+  image: '',
   type_name: '',
   favorite: false,
 };
@@ -37,7 +38,7 @@ function SpiritForm({ obj }) {
     } else {
       const payload = { ...formInput, uid: user.uid };
       createSpirit(payload).then(() => {
-        router.push('/');
+        router.push(`/spirits/${obj.firebaseKey}`);
       });
     }
   };
@@ -53,6 +54,18 @@ function SpiritForm({ obj }) {
           placeholder="Enter A Spirit"
           name="type_name"
           value={formInput.type_name}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      {/* IMAGE INPUT  */}
+      <FloatingLabel controlId="floatingInput2" label="Image URL" className="mb-3">
+        <Form.Control
+          type="url"
+          placeholder="Image of Bottle"
+          name="image"
+          value={formInput.image}
           onChange={handleChange}
           required
         />
@@ -82,6 +95,7 @@ function SpiritForm({ obj }) {
 
 SpiritForm.propTypes = {
   obj: PropTypes.shape({
+    image: PropTypes.string,
     type_name: PropTypes.string,
     favorite: PropTypes.bool,
     firebaseKey: PropTypes.string,

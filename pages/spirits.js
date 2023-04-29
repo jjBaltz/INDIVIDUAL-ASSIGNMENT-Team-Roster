@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Button } from 'react-bootstrap';
 import { getSpirits } from '../api/spiritsData';
 import SpiritCard from '../components/SpiritCard';
 import { useAuth } from '../utils/context/authContext';
@@ -17,10 +19,15 @@ export default function Spirits() {
   }, []);
 
   return (
-    <div className="text-center my-4 d-flex flex-wrap">
-      {spirits.map((spirit) => (
-        <SpiritCard key={spirit.firebaseKey} spiritObj={spirit} onUpdate={getAllSpirits} />
-      ))}
+    <div className="text-center my-4">
+      <Link href="/spirit/newSpirit" passHref>
+        <Button variant="add-btl">Add New Spirit</Button>
+      </Link>
+      <div className="text-center my-4 d-flex flex-wrap">
+        {spirits.map((spirit) => (
+          <SpiritCard key={spirit.firebaseKey} spiritObj={spirit} onUpdate={getAllSpirits} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getSpiritBottles } from '../../api/spiritsData';
 import { viewSpiritDetails } from '../../api/mergedData';
@@ -32,7 +34,10 @@ export default function ViewSpirit() {
         </div>
       </div>
       <br />
-      <h3 className="text-black details text-left">Spirit&apos;s Bottle Collection</h3>
+      <h3 className="text-black details text-left">Collection</h3>
+      <Link href="/bottle/newBottle" passHref>
+        <Button variant="add-btl">Add A Bottle</Button>
+      </Link>
       <div className="d-flex flex-wrap">
         {bottles.map((bottle) => (
           <BottleCard key={bottle.firebaseKey} bottleObj={bottle} onUpdate={getSpiritBottles} />

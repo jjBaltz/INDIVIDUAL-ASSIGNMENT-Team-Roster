@@ -59,7 +59,7 @@ const getSingleSpirit = (firebaseKey) => new Promise((resolve, reject) => {
 // DELETE SPIRIT
 const deleteSingleSpirit = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/spirits/${firebaseKey}.json`, {
-    method: 'GET',
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -72,7 +72,7 @@ const deleteSingleSpirit = (firebaseKey) => new Promise((resolve, reject) => {
 // UPDATE SPIRIT
 const updateSpirit = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/spirits/${payload.firebaseKey}.json`, {
-    method: 'GET',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },

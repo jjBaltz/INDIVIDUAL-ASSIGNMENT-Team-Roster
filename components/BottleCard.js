@@ -16,10 +16,10 @@ function BottleCard({ bottleObj, onUpdate }) {
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Img variant="top" src={bottleObj.image} alt={bottleObj.title} style={{ height: '400px' }} />
+      <Card.Img variant="top" src={bottleObj.image} alt={bottleObj.title} style={{ height: '300px' }} />
       <Card.Body>
         <Card.Title>{bottleObj.title}</Card.Title>
-        <p className="card-text bold">{bottleObj.sale && <span>SALE<br /></span> } ${bottleObj.price}</p>
+        <p className="card-text bold">{bottleObj.favorite && <span>Favorite<br /></span> } ${bottleObj.price}</p>
         {/* DYNAMIC LINK TO VIEW THE BOOK DETAILS  */}
         <Link href={`/bottle/${bottleObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
@@ -40,7 +40,7 @@ BottleCard.propTypes = {
   bottleObj: PropTypes.shape({
     image: PropTypes.string,
     title: PropTypes.string,
-    sale: PropTypes.bool,
+    favorite: PropTypes.bool,
     price: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,

@@ -16,6 +16,7 @@ function SpiritCard({ spiritObj, onUpdate }) {
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
+      <Card.Img variant="top" src={spiritObj.image} alt={spiritObj.type_name} style={{ height: '300px' }} />
       <Card.Body>
         <Card.Title>{spiritObj.type_name}</Card.Title>
         <p className="card-text bold">{spiritObj.favorite ? '♡' : ''}</p>
@@ -37,6 +38,7 @@ function SpiritCard({ spiritObj, onUpdate }) {
 
 SpiritCard.propTypes = {
   spiritObj: PropTypes.shape({
+    image: PropTypes.string,
     type_name: PropTypes.string,
     favorite: PropTypes.bool,
     firebaseKey: PropTypes.string,
